@@ -1,5 +1,6 @@
 package com.pcshop.demoone.api.model;
 
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,20 +11,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
-
+@Table(name = "card")
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private double price;
-    private int quantity;
+    private long cardNo;
+    private LocalDate expDate;
+    private int cvv;
 
-    public String getPrice() {
-        return price + " GBP";
-    }
 }

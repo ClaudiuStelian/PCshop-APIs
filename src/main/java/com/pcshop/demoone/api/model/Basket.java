@@ -1,31 +1,24 @@
 package com.pcshop.demoone.api.model;
 
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Baskets")
 public class Basket {
-
-    private String userName;
-    private List<Product> products;
-
-    public Basket(String userName, List<Product> products) {
-        this.userName = userName;
-        this.products = products;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProduct(List<Product> products) {
-        this.products = products;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private double price;
+    private int quantity;
 }
