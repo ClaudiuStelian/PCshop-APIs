@@ -1,6 +1,5 @@
 package com.pcshop.demoone.api.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +40,10 @@ public class UserController {
 
     @PostMapping("/user/register")
     public ResponseEntity<?> registerUser(@RequestBody(required = false) User user) {
-        if (((user == null)) || user.getCard() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userService.userHint());
+        if (user == null || user.getCard() == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("User object or card object is null. Please provide a complete User object.");
         }
         return userService.registerUser(user);
     }
@@ -55,7 +56,7 @@ public class UserController {
     @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(required = false) int id,
             @RequestHeader(value = "password", required = false) String password) {
-        return userService.deleterUser(id, password);
+        return userService.deleteUser(id, password);
     }
 
 }

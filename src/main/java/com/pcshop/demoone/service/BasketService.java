@@ -1,8 +1,8 @@
 package com.pcshop.demoone.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,9 @@ import com.pcshop.demoone.api.model.Basket;
 import com.pcshop.demoone.api.model.Product;
 import com.pcshop.demoone.api.model.ProductsRequest;
 import com.pcshop.demoone.api.model.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Service
 public class BasketService {
@@ -22,7 +25,7 @@ public class BasketService {
     @Autowired
     private ProductDao productDao;
 
-    public ResponseEntity<?> registerItem(ProductsRequest productsRequest) {
+    public ResponseEntity<Object> addItemsToBasket(ProductsRequest productsRequest) {
         if (productsRequest.getQuantity() == 0) {
             productsRequest.setQuantity(1);
         }
@@ -66,6 +69,30 @@ public class BasketService {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product not found");
         }
+    }
+
+    public ResponseEntity<Object> getBasket(String email) {
+        List<Basket> basket = userDao.findByEmail(email).getBasket();
+        ResponsData responsData = new ResponsData(email, basket);
+        return ResponseEntity.ok().body(responsData);
+    }
+
+    public ResponseEntity<Object> getBaskets() {
+        List<User> responsUsers = (List<User>) userDao.findAll();
+        List<ResponsData> responsDatas = new ArrayList<>();
+        for (User user : responsUsers) {
+            ResponsData responsData = new ResponsData(user.getEmail(), user.getBasket());
+            responsDatas.add(responsData);
+        }
+        return ResponseEntity.ok().body(responsDatas);
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ResponsData {
+        private String email;
+        private List<Basket> basket;
     }
 
 }

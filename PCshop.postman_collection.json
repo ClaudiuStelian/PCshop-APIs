@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PCshop/user?id=1",
+							"raw": "http://localhost:8080/PCshop/userid/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,13 +23,29 @@
 							"port": "8080",
 							"path": [
 								"PCshop",
-								"user"
+								"userid",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserByEmail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PCshop/user/StelianClau@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
 							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"user",
+								"StelianClau@gmail.com"
 							]
 						}
 					},
@@ -65,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 22,\r\n    \"name\": \"Claudius\",\r\n    \"age\": 45,\r\n    \"email\": \"Claudiu@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"dob\": \"1990-01-01\",\r\n  \"password\": \"myP@ssword123!\",\r\n  \"email\": \"Loomee@exadmple.com\",\r\n  \"gender\": \"male\",\r\n  \"card\": {\r\n    \"cardNo\": 1234567890123456,\r\n    \"expDate\": \"2024-12-31\",\r\n    \"cvv\": 123\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,6 +103,79 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"ClaudiuStelian\",\r\n\"dob\": \"1992-09-23\",\r\n\"password\": \"Claudiu123@\",\r\n\"email\": \"StelianClau@gmail.com\",\r\n\"gender\": \"male\",\r\n  \"card\": {\r\n    \"cardNo\": 1234567890123457,\r\n    \"expDate\": \"2025-06-30\",\r\n    \"cvv\": 123\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PCshop/user/patch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"user",
+								"patch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "password",
+								"value": "P@ssword123!",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/PCshop/user/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"user",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -99,7 +188,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/PCshop/product?id=1",
+							"raw": "http://localhost:8080/PCshop/product/RTX 4070 GPU",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -107,13 +196,29 @@
 							"port": "8080",
 							"path": [
 								"PCshop",
-								"product"
+								"product",
+								"RTX 4070 GPU"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PCshop/productid/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
 							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"productid",
+								"10"
 							]
 						}
 					},
@@ -140,13 +245,35 @@
 					"response": []
 				},
 				{
+					"name": "Delete Products",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PCshop/product/delete/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"product",
+								"delete",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Register Product",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "   {\r\n        \"name\": \"RTX 4090 GPU\",\r\n        \"price\": 1200.0,\r\n        \"id\": 1,\r\n        \"quantity\": 28\r\n    }",
+							"raw": "   {\r\n        \"name\": \"RTX 4060 GPU\",\r\n        \"price\": 1000.0,\r\n        \"quantity\": 28\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,19 +295,23 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Basket",
-			"item": [
+				},
 				{
-					"name": "Basket",
+					"name": "Update Product",
 					"request": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n        \"name\": \"RTX 4060 GPU\",\r\n        \"price\": 2000.0,\r\n        \"quantity\": 28\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/PCshop/basket?userName=Claudius",
+							"raw": "http://localhost:8080/PCshop/product/update",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -188,13 +319,34 @@
 							"port": "8080",
 							"path": [
 								"PCshop",
-								"basket"
+								"product",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"item": [
+				{
+					"name": "Basket By Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/PCshop/basket/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
 							],
-							"query": [
-								{
-									"key": "userName",
-									"value": "Claudius"
-								}
+							"port": "8080",
+							"path": [
+								"PCshop",
+								"basket",
+								"1"
 							]
 						}
 					},
@@ -207,7 +359,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"Claudiu\",\r\n    \"productName\": \"RTX 4090 GPU\"\r\n}",
+							"raw": "{\r\n  \"email\":\"johndos@example.com\",\r\n  \"productName\": \"RTX 4060 GPU\",\r\n  \"quantity\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

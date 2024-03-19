@@ -32,10 +32,17 @@ To get started with the PC Shop APIs, follow the installation and usage instruct
    code .
 
 ## Usage
+1. Configure `target\classes\application.properties` with your Database Connection details.
 
-1. Run `src\main\java\com\pcshop\demoone\DemooneApplication.java` file
+1. Run `src\main\java\com\pcshop\demoone\DemooneApplication.java` file.
 
 2. Import the `PCshop.postman_collection.json` file in Postman.
 
-3. Send request trough Postman to use the services
+3. Send request trough Postman to use the services.
+
+
+## TDD (Test Driven Development)
+   
+
+## Unit Testing
 

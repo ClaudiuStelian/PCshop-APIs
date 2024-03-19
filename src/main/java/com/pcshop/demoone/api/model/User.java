@@ -2,9 +2,6 @@ package com.pcshop.demoone.api.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +24,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private LocalDate dob;
     private String password;
@@ -40,5 +38,4 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<com.pcshop.demoone.api.model.Basket> basket;
-
 }

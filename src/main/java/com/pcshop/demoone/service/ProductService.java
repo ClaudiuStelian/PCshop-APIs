@@ -16,18 +16,18 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
-    public ResponseEntity<?> getProduct(int id) {
+    public ResponseEntity<Object> getProductById(int id) {
         if ((id > 0) && productDao.findById(id) != null) {
             return ResponseEntity.status(HttpStatus.OK).body(productDao.findById(id));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(String.format("Product id %s was not found", id));
     }
 
-    public ResponseEntity<?> getProducts() {
+    public ResponseEntity<Object> getProducts() {
         return ResponseEntity.status(HttpStatus.OK).body(productDao.findAll());
     }
 
-    public ResponseEntity<?> registerProduct(Product product) {
+    public ResponseEntity<Object> registerProduct(Product product) {
         if (productDao.findByName(product.getName()).isPresent() || (product == null) || (product.getName() == null)
                 || (product.getPrice().equals("0.0 GBP"))
                 || (product.getQuantity() <= 0)
@@ -37,14 +37,14 @@ public class ProductService {
             return ResponseEntity.status(HttpStatus.OK).body(productDao.save(product));
     }
 
-    public ResponseEntity<?> getProduct(String name) {
+    public ResponseEntity<Object> getProductByName(String name) {
         if (productDao.findByName(name).orElse(null) != null) {
             return ResponseEntity.ok().body(productDao.findByName(name));
         }
         return ResponseEntity.badRequest().body("Bad request please see the API specs");
     }
 
-    public ResponseEntity<?> deleteProduct(int id) {
+    public ResponseEntity<String> deleteProduct(int id) {
         if (productDao.findById(id).isPresent()) {
             productDao.deleteById(id);
             return ResponseEntity.ok()
@@ -54,7 +54,8 @@ public class ProductService {
             return ResponseEntity.badRequest().body("Bad request please see the API specs");
     }
 
-    public ResponseEntity<?> updateProduct(Product product) {
+    @SuppressWarnings("null")
+    public ResponseEntity<Object> updateProduct(Product product) {
         if (product.getName() == null) {
             return ResponseEntity.badRequest().body("Product name is not declared");
         } else if (!(productDao.findByName(product.getName()).isPresent()) ||

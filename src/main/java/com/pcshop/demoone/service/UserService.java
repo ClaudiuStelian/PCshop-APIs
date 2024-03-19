@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public ResponseEntity<?> getUser(int id) {
+    public ResponseEntity<Object> getUser(int id) {
         User user = userDao.findById(id).orElse(null);
         if (user != null) {
             return ResponseEntity.status(HttpStatus.OK).body(user);
@@ -24,7 +24,7 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User " + id + " not found");
     }
 
-    public ResponseEntity<?> getUserByEmail(String email) {
+    public ResponseEntity<Object> getUserByEmail(String email) {
         User user = userDao.findByEmail(email);
         if (user != null) {
             return ResponseEntity.status(HttpStatus.OK).body(user);
@@ -33,7 +33,7 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User " + email + " not found");
     }
 
-    public ResponseEntity<?> registerUser(User user) {
+    public ResponseEntity<Object> registerUser(User user) {
         if ((userDao.findByEmail(user.getEmail()) != null)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(String.format("The email %s is already used", user.getEmail()));
@@ -56,7 +56,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<?> deleterUser(int id, String password) {
+    public ResponseEntity<String> deleteUser(int id, String password) {
         if ((id <= 0) || (password == null)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("The password header and/or the path variable is missing.");
@@ -74,11 +74,11 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<?> getAllUserList() {
+    public ResponseEntity<Object> getAllUserList() {
         return ResponseEntity.status(HttpStatus.OK).body(userDao.findAll());
     }
 
-    public ResponseEntity<?> updateUser(User user) {
+    public ResponseEntity<Object> updateUser(User user) {
         if (user.getEmail() == null || user.getDob() == null || user.getName() == null || user.getGender() == null
                 || user.getPassword() == null || user.getCard().getExpDate() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userHint());
