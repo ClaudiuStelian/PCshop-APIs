@@ -42,7 +42,7 @@ To get started with the PC Shop APIs, follow the installation and usage instruct
 
 
 ## TDD (Test Driven Development)
-   
+   https://github.com/ClaudiuStelian/PCshop-APIs/tree/master/src/test/java/com/pcshop/demoone/api/controller
 
 ## Unit Testing
-
+   https://github.com/ClaudiuStelian/PCshop-APIs/tree/master/src/test/java/com/pcshop/demoone/api/model
